@@ -10,18 +10,17 @@ public class GameEngine implements Runnable {
 	
 	private final Messages messages;
 	private final GameRenderable renderer;
-	private final UserInputReadable reader;
 	
-	public GameEngine(GameRenderable renderer, UserInputReadable reader) {
+	public GameEngine(GameRenderable renderer) {
 		this.messages = loadMessages();
 		this.renderer = renderer;
-		this.reader = reader;
 	}
 
 	@Override
 	public void run() {
 		renderer.displayMessage(messages.getWelcomeMessage());
-        renderer.displayMessage("Your name is " + reader.getUserInput());
+        String userInput = renderer.displayMessageWithInput("Your name is");
+        renderer.displayMessage("You typed: " + userInput);
 	}
 
 	private Messages loadMessages() {

@@ -17,10 +17,10 @@ public class App
     public static void main( String[] args )
     {
     	// Create objects for dependency injection into GameEngine
-    	GameRenderable renderer = new ConsoleDisplay();
     	UserInputReadable reader = new ConsoleReader();
+    	GameRenderable renderer = new ConsoleDisplay(reader);
     	
-    	GameEngine gameEngine = new GameEngine(renderer, reader);
+    	GameEngine gameEngine = new GameEngine(renderer);
     	gameEngine.run();
     }
 }
