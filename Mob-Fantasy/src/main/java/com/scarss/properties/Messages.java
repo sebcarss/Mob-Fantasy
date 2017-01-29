@@ -5,7 +5,7 @@ import java.io.IOException;
 public class Messages extends RSCProperties {
 	
 	private static final String WELCOME_MESSAGE = "welcomeMessage";
-	private static final String FILENAME = "com/scarss/messages.properties";
+	private static final String FILENAME = "com/scarss/properties/messages.properties";
 
 	public Messages() throws IOException {
 		super();
