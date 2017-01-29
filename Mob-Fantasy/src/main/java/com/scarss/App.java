@@ -1,8 +1,8 @@
 package com.scarss;
 
-import java.io.IOException;
-
-import com.scarss.properties.Messages;
+import com.scarss.engine.GameEngine;
+import com.scarss.engine.output.ConsoleDisplay;
+import com.scarss.engine.output.GameRenderable;
 
 /**
  * Mob Fantasy - A game to give a group of people the experience of programming in a mob. This is a game that
@@ -14,14 +14,8 @@ public class App
 {
     public static void main( String[] args )
     {
-    	Messages messages = null;
-    	
-    	try {
-			messages = new Messages();
-    	} catch(IOException e) {
-    		e.printStackTrace();
-    	}
-    	
-        System.out.println(messages.getWelcomeMessage());
+    	GameRenderable renderer = new ConsoleDisplay();
+    	GameEngine gameEngine = new GameEngine(renderer);
+    	gameEngine.run();
     }
 }
