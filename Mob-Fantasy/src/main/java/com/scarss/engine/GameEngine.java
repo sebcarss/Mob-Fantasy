@@ -2,6 +2,7 @@ package com.scarss.engine;
 
 import java.io.IOException;
 
+import com.scarss.engine.input.UserInputReadable;
 import com.scarss.engine.output.GameRenderable;
 import com.scarss.properties.Messages;
 
@@ -9,18 +10,18 @@ public class GameEngine implements Runnable {
 	
 	private final Messages messages;
 	private final GameRenderable renderer;
+	private final UserInputReadable reader;
 	
-	public GameEngine(GameRenderable renderer) {
+	public GameEngine(GameRenderable renderer, UserInputReadable reader) {
 		this.messages = loadMessages();
 		this.renderer = renderer;
+		this.reader = reader;
 	}
 
 	@Override
 	public void run() {
 		renderer.displayMessage(messages.getWelcomeMessage());
-        
-        String name = getName();
-        System.out.println("Your name is " + name);
+        renderer.displayMessage("Your name is " + reader.getUserInput());
 	}
 
 	private Messages loadMessages() {
@@ -33,11 +34,6 @@ public class GameEngine implements Runnable {
     	}
 
     	return messages;
-	}
-
-	// TODO Move to an interface for reading input from user
-	private String getName() {
-		return System.console().readLine();
 	}
 
 }

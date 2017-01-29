@@ -1,6 +1,8 @@
 package com.scarss;
 
 import com.scarss.engine.GameEngine;
+import com.scarss.engine.input.ConsoleReader;
+import com.scarss.engine.input.UserInputReadable;
 import com.scarss.engine.output.ConsoleDisplay;
 import com.scarss.engine.output.GameRenderable;
 
@@ -14,8 +16,11 @@ public class App
 {
     public static void main( String[] args )
     {
+    	// Create objects for dependency injection into GameEngine
     	GameRenderable renderer = new ConsoleDisplay();
-    	GameEngine gameEngine = new GameEngine(renderer);
+    	UserInputReadable reader = new ConsoleReader();
+    	
+    	GameEngine gameEngine = new GameEngine(renderer, reader);
     	gameEngine.run();
     }
 }
