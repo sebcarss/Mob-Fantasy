@@ -2,7 +2,6 @@ package com.scarss.engine;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 import com.scarss.challenges.SingleOrcAttack;
 import com.scarss.engine.output.GameRenderable;
@@ -20,22 +19,13 @@ public class GameEngine implements Runnable {
 
 	@Override
 	public void run() {
-		// Welcome message - intro only
 		renderer.displayMessage(messages.getWelcomeMessage());
 		
-		@SuppressWarnings("unchecked")
 		List<SingleOrcAttack> challenges = (List<SingleOrcAttack>) messages.getChallenges();
 		
-		// Loop for each question
-        String userInput = renderer.displayMessageWithInput("Your name is");
-        
-        renderer.displayMessage("You typed: " + userInput);
-        
-        if (null != userInput && userInput.equals("Seb")) {
-        	renderer.displayMessage("Whoop!");
-        } else {
-        	renderer.displayMessage("You suck!");
-        }
+		for (SingleOrcAttack challenge : challenges) {
+			challenge.offer();
+		}
 	}
 
 	private Messages loadMessages() {

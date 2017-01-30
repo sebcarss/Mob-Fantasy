@@ -5,11 +5,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public abstract class RSCProperties implements PropertyValueAccessible {
+public abstract class Component implements PropertyValueAccessible {
 
 	private final Properties properties = new Properties();
 	
-	public RSCProperties() throws IOException {
+	public Component() throws IOException {
 		loadProperties(getFilename());
 	}
 	

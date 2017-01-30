@@ -7,7 +7,7 @@ import java.util.List;
 
 import com.scarss.challenges.SingleOrcAttack;
 
-public class Messages extends RSCProperties {
+public class Messages extends Component {
 	
 	private static final String WELCOME_MESSAGE = "welcomeMessage";
 	private static final String FILENAME = "com/scarss/properties/messages.properties";
@@ -41,7 +41,7 @@ public class Messages extends RSCProperties {
 			}
 		}
 		
-		return null;
+		return challengeObjects;
 	}
 
 	@Override
