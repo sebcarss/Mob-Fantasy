@@ -31,7 +31,7 @@ public abstract class RSCProperties implements PropertyValueAccessible {
 	/** 
 	 * This is the file path and name of the properties file within the src/main/resources folder.
 	 * It is required for each properties file to be loaded properly to a Properties file.
-	 * e.g "com/scarss/properties/messages.properties" 
+	 * e.g "com/scarss/properties/Messages.properties" 
 	 * 
 	 * @return
 	 */
