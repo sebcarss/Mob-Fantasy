@@ -6,33 +6,31 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.scarss.challenges.SingleOrcAttack;
-import com.scarss.engine.output.GameRenderable;
 import com.scarss.properties.Component;
 
 public class GameEngine extends Component implements Runnable {
 	
 	private static final String COMPONENT_PATH = "com/scarss/engine/GameEngine.properties";
+	private static final String DISPLAY_CONTROLLER = "displayController";
 	private static final String WELCOME_MESSAGE = "welcomeMessage";
 	
-	private final GameRenderable renderer;
+	private DisplayController renderer;
+	private final String welcomeMessage;
+	private final List<SingleOrcAttack> challenges;
 	
-	public GameEngine(GameRenderable renderer) throws IOException {
-		this.renderer = renderer;
+	public GameEngine() throws IOException {
+		this.welcomeMessage = getPropertyValue(WELCOME_MESSAGE);
+		this.renderer = (DisplayController) createComponent(DISPLAY_CONTROLLER);
+		this.challenges = getChallenges();
 	}
 
 	@Override
 	public void run() {
-		renderer.displayMessage(getWelcomeMessage());
-		
-		List<SingleOrcAttack> challenges = (List<SingleOrcAttack>) getChallenges();
+		renderer.displayMessage(welcomeMessage);
 		
 		for (SingleOrcAttack challenge : challenges) {
 			challenge.offer();
 		}
-	}
-	
-	private String getWelcomeMessage() {
-		return (String) getPropertyValue(WELCOME_MESSAGE);
 	}
 	
 	private List<SingleOrcAttack> getChallenges() {

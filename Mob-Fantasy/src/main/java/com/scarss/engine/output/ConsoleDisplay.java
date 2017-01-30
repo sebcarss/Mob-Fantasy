@@ -1,13 +1,18 @@
 package com.scarss.engine.output;
 
+import java.io.IOException;
+
 import com.scarss.engine.input.UserInputReadable;
+import com.scarss.properties.Component;
 
-public class ConsoleDisplay implements GameRenderable {
-
-	private final UserInputReadable reader;
+public class ConsoleDisplay extends Component implements GameRenderable {
 	
-	public ConsoleDisplay(UserInputReadable reader) {
-		this.reader = reader;
+	private final static String COMPONENT_PATH = "com/scarss/engine/output/ConsoleDisplay.properties";
+	private static final String READER = "reader";
+	private UserInputReadable reader;
+	
+	public ConsoleDisplay() throws IOException {
+		reader = (UserInputReadable) createComponent(READER);
 	}
 
 	/* (non-Javadoc)
@@ -25,5 +30,10 @@ public class ConsoleDisplay implements GameRenderable {
 	public String displayMessageWithInput(String message) {
 		System.out.println(message);
 		return reader.getUserInput();
+	}
+
+	@Override
+	protected String getFilename() {
+		return COMPONENT_PATH;
 	}
 }
