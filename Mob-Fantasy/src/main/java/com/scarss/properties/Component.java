@@ -5,7 +5,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
+
+import com.scarss.challenges.SingleOrcAttack;
 
 public abstract class Component implements PropertyValueAccessible {
 
@@ -53,21 +58,36 @@ public abstract class Component implements PropertyValueAccessible {
 	 * @param key
 	 * @return
 	 */
-	protected Object createComponent(String key) {
-		Object clazzInstance = null;
-		
+	protected Component createComponent(String key) {
+		String componentName = getPropertyValue(key);
+		return instantiateClass(componentName);
+	}
+
+	private Component instantiateClass(String componentName) {
+		Component clazzInstance = null;
 		try {
-			String componentName = getPropertyValue(key);
-			Class<?> clazz = Class.forName(componentName);
-			Constructor<?> ctor = clazz.getConstructor();
-			clazzInstance = (Object) ctor.newInstance();
+			@SuppressWarnings("unchecked")
+			Class<Component> clazz = (Class<Component>) Class.forName(componentName);
+			Constructor<Component> ctor = clazz.getConstructor();
+			clazzInstance = (Component) ctor.newInstance();
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException |
 				 NoSuchMethodException | SecurityException | IllegalArgumentException | 
 				 InvocationTargetException e) {
 			e.printStackTrace(); // TODO Add an appropriate error message
 		}
-		
 		return clazzInstance;
+	}
+
+	protected List<? extends Component> createComponents(String key) {
+		String propertyValue = getPropertyValue(key);
+		String[] componentArray = propertyValue.split(",");
+		List<String> componentNames = Arrays.asList(componentArray);
+		List<Component> components = new ArrayList<>();
+		
+		for (String componentName : componentNames) {
+			components.add(instantiateClass(componentName));
+		}
+		return components;
 	}
 
 }
