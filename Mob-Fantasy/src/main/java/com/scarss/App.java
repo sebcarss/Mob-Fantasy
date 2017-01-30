@@ -1,5 +1,7 @@
 package com.scarss;
 
+import java.io.IOException;
+
 import com.scarss.engine.GameEngine;
 import com.scarss.engine.input.ConsoleReader;
 import com.scarss.engine.input.UserInputReadable;
@@ -20,7 +22,11 @@ public class App
     	UserInputReadable reader = new ConsoleReader();
     	GameRenderable renderer = new ConsoleDisplay(reader);
     	
-    	GameEngine gameEngine = new GameEngine(renderer);
-    	gameEngine.run();
+		try {
+			GameEngine gameEngine = new GameEngine(renderer);
+			gameEngine.run();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 }
