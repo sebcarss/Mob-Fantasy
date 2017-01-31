@@ -9,7 +9,7 @@ import com.scarss.properties.Component;
 
 public class GameEngine extends Component implements Runnable {
 	
-	private static final String HEALTH = "health";
+	//private static final String HEALTH = "health";
 	private static final String CHALLENGES = "challenges";
 	private static final String COMPONENT_PATH = "com/scarss/engine/GameEngine.properties";
 	private static final String DISPLAY_CONTROLLER = "displayController";
