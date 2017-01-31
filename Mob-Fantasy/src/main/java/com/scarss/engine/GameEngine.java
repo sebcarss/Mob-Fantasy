@@ -46,7 +46,7 @@ public class GameEngine extends Component implements Runnable {
 				if (response.isSuccess()) {
 					challengeComplete = true;
 				} else {
-					displayController.render("\nOh dear, that didn't work this time... please try again!\n");
+					displayController.render("\nOh dear, that didn't work this time... please try something else.\n");
 				}
 			} while (!challengeComplete);
 		}
