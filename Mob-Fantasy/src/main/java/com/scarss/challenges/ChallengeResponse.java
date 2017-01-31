@@ -7,11 +7,8 @@ public class ChallengeResponse {
 	private boolean successful = false;
 	private Integer damage;
 
-	public ChallengeResponse(Component response) {
-		if (response != null) {
-			successful = true;
-			damage = new Integer(response.getPropertyValue("damage"));
-		}
+	public ChallengeResponse() {
+//		damage = new Integer(response.getPropertyValue("damage"));
 	}
 	
 	public boolean isSuccessful() {
@@ -20,6 +17,14 @@ public class ChallengeResponse {
 
 	public Integer getDamage() {
 		return damage;
+	}
+
+	public void setSuccessful(boolean successful) {
+		this.successful = successful;
+	}
+
+	public void setDamage(Integer damage) {
+		this.damage = damage;
 	}
 	
 }

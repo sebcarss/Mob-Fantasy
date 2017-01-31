@@ -4,6 +4,7 @@ import static java.util.Arrays.asList;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Properties;
 
 import com.scarss.properties.Component;
 
@@ -16,7 +17,7 @@ public abstract class Challenge extends Component {
 	}
 
 	public ChallengeResponse processAnswer(String answer) {
-		Component component = null;
+		ChallengeResponse response = new ChallengeResponse();
 		
 		String value = getPropertyValue(POSSIBLE_ANSWERS);
 		List<String> possibleAnswers = asList(value.split(","));
@@ -29,12 +30,20 @@ public abstract class Challenge extends Component {
 				String possibleAnswerValue = possibleAnswerKeyValueArray[1];
 				
 				if (answer != null && answer.equals(possibleAnswerKey)) {
-					component = instantiateClass(possibleAnswerValue);
+					Properties properties = new Properties();
+					try {
+						loadProperties(possibleAnswerValue + ".properties", properties);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					
+					response.setSuccessful(true);
+					response.setDamage(new Integer(properties.getProperty("damage")));
 				}
 			}
 		}
 		
-		return new ChallengeResponse(component);
+		return response;
 	}
 
 }

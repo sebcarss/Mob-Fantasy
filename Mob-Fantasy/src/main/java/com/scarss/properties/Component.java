@@ -10,17 +10,15 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
-import com.scarss.challenges.SingleOrcAttack;
-
 public abstract class Component implements PropertyValueAccessible {
 
 	private final Properties properties = new Properties();
 	
 	public Component() throws IOException {
-		loadProperties(getFilename());
+		loadProperties(getFilename(), properties);
 	}
 	
-	private void loadProperties(String filename) throws IOException {
+	protected void loadProperties(String filename, Properties properties) throws IOException {
 		InputStream inputStream = getInputStream(filename);
 		
 		if (inputStream != null) {

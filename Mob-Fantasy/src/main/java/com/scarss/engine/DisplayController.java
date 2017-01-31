@@ -9,6 +9,7 @@ import com.scarss.properties.Component;
 
 public class DisplayController extends Component implements GameRenderable {
 
+	private static final String STORY = "story";
 	private static final String DISPLAY_RENDERER = "renderer";
 	private static final String COMPONENT_PATH = "com/scarss/engine/DisplayController.properties";
 	private GameRenderable renderer;
@@ -24,7 +25,7 @@ public class DisplayController extends Component implements GameRenderable {
 	}
 	
 	public ChallengeResponse render(Challenge challenge) {
-		String answer = renderer.displayMessageWithInput(challenge.getPropertyValue("story"));
+		String answer = renderer.displayMessageWithInput(challenge.getPropertyValue(STORY));
 		ChallengeResponse response = challenge.processAnswer(answer);
 		return response;
 	}
