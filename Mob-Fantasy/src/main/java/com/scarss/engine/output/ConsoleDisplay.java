@@ -19,7 +19,7 @@ public class ConsoleDisplay extends Component implements GameRenderable {
 	 * @see com.scarss.engine.output.GameRenderable#displayMessage(java.lang.String)
 	 */
 	@Override
-	public void displayMessage(String message) {
+	public void render(String message) {
 		System.out.println(message);
 	}
 

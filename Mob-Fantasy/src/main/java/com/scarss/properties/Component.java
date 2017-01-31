@@ -63,7 +63,7 @@ public abstract class Component implements PropertyValueAccessible {
 		return instantiateClass(componentName);
 	}
 
-	private Component instantiateClass(String componentName) {
+	protected Component instantiateClass(String componentName) {
 		Component clazzInstance = null;
 		try {
 			@SuppressWarnings("unchecked")
