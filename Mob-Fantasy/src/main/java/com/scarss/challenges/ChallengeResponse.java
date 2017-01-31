@@ -4,18 +4,22 @@ import com.scarss.properties.Component;
 
 public class ChallengeResponse {
 
-	private final Component response;
+	private boolean successful = false;
+	private Integer damage;
 
 	public ChallengeResponse(Component response) {
-		this.response = response;
+		if (response != null) {
+			successful = true;
+			damage = new Integer(response.getPropertyValue("damage"));
+		}
 	}
 	
 	public boolean isSuccessful() {
-		if (response != null) {
-			return true;
-		} else {
-			return false;
-		}
+		return successful;
+	}
+
+	public Integer getDamage() {
+		return damage;
 	}
 	
 }

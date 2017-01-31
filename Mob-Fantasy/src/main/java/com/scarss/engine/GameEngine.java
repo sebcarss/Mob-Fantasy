@@ -9,6 +9,7 @@ import com.scarss.properties.Component;
 
 public class GameEngine extends Component implements Runnable {
 	
+	private static final String HEALTH = "health";
 	private static final String CHALLENGES = "challenges";
 	private static final String COMPONENT_PATH = "com/scarss/engine/GameEngine.properties";
 	private static final String DISPLAY_CONTROLLER = "displayController";
@@ -17,29 +18,40 @@ public class GameEngine extends Component implements Runnable {
 	private DisplayController displayController;
 	private final String welcomeMessage;
 	private final List<Challenge> challenges;
+	private Integer health;
 	
 	@SuppressWarnings("unchecked")
 	public GameEngine() throws IOException {
 		this.welcomeMessage = getPropertyValue(WELCOME_MESSAGE);
 		this.displayController = (DisplayController) createComponent(DISPLAY_CONTROLLER);
 		this.challenges = (List<Challenge>) createComponents(CHALLENGES);
+		this.health = new Integer(getPropertyValue(HEALTH));
 	}
 
 	@Override
 	public void run() {
 		displayController.render(welcomeMessage);
+		displayController.render(getHealthMessage());
 		
 		for (Challenge challenge : challenges) {
 			boolean challengeComplete = false;
 			
 			do {
 				ChallengeResponse response = displayController.render(challenge);
+				if (response.getDamage() != null) {
+					health = health - response.getDamage();
+				}
+				displayController.render(getHealthMessage());
 				
 				if (response.isSuccessful()) {
 					challengeComplete = true;
 				} 
 			} while (!challengeComplete);
 		}
+	}
+
+	private String getHealthMessage() {
+		return "The mob's health is currently: " + health;
 	}
 	
 	@Override
