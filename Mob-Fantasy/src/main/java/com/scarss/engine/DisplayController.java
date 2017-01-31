@@ -25,7 +25,7 @@ public class DisplayController extends Component implements GameRenderable {
 	}
 	
 	public ChallengeResponse render(Challenge challenge) {
-		String answer = renderer.displayMessageWithInput(challenge.getPropertyValue(STORY));
+		String answer = renderer.displayMessageWithInput(challenge.getStory());
 		ChallengeResponse response = challenge.processAnswer(answer);
 		return response;
 	}

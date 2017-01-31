@@ -10,6 +10,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
+import com.scarss.challenges.Challenge;
+
 public abstract class Component implements PropertyValueAccessible {
 
 	private final Properties properties = new Properties();
@@ -86,6 +88,29 @@ public abstract class Component implements PropertyValueAccessible {
 			components.add(instantiateClass(componentName));
 		}
 		return components;
+	}
+	
+	public List<? extends Challenge> createChallenges(String key) {
+		String propertyValue = getPropertyValue(key);
+		String[] componentArray = propertyValue.split(",");
+		List<String> componentNames = Arrays.asList(componentArray);
+		List<Challenge> challenges = new ArrayList<>();
+		
+		for (String componentName : componentNames) {
+//			components.add(instantiateClass("com.scarss.challenges." + componentName));
+			Properties props = new Properties();
+			try {
+				loadProperties("com/scarss/challenges/" + componentName + ".properties", props);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			Challenge challenge = new Challenge();
+			challenge.setStory(props.getProperty("story"));
+			challenge.setPossibleAnswersString(props.getProperty("possibleAnswers"));
+			challenges.add(challenge);
+		}
+		return challenges;
 	}
 
 }

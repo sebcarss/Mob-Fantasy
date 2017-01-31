@@ -11,7 +11,7 @@ public class ChallengeResponse {
 //		damage = new Integer(response.getPropertyValue("damage"));
 	}
 	
-	public boolean isSuccessful() {
+	public boolean isSuccess() {
 		return successful;
 	}
 
@@ -19,7 +19,7 @@ public class ChallengeResponse {
 		return damage;
 	}
 
-	public void setSuccessful(boolean successful) {
+	public void setSuccess(boolean successful) {
 		this.successful = successful;
 	}
 
