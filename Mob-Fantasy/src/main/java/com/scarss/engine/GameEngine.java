@@ -9,7 +9,7 @@ import com.scarss.properties.Component;
 
 public class GameEngine extends Component implements Runnable {
 	
-	private static final String HEALTH = "health";
+	//private static final String HEALTH = "health";
 	private static final String CHALLENGES = "challenges";
 	private static final String COMPONENT_PATH = "com/scarss/engine/GameEngine.properties";
 	private static final String DISPLAY_CONTROLLER = "displayController";
@@ -46,7 +46,7 @@ public class GameEngine extends Component implements Runnable {
 				if (response.isSuccess()) {
 					challengeComplete = true;
 				} else {
-					displayController.render("That is not a known command... please try again!");
+					displayController.render("\nOh dear, that didn't work this time... please try something else.");
 				}
 			} while (!challengeComplete);
 		}
