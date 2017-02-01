@@ -51,7 +51,10 @@ public class GameEngine extends Component implements Runnable {
 			} while (!challengeComplete);
 		}
 		
-		displayController.render("Well Done! You have completed the game as a mob... what a great learning experience!");
+		displayController.render("\nThe Fighter attacks and kills them both. "
+				+ "He searches them and finds they are holding a death warrant for The Five for 100,000 Dhrac. "
+				+ "Somebody has set them up in this death trap and they need answers.\n\n"
+				+ "Well Done! You have completed the game as a mob... what a great learning experience!");
 	}
 
 //	private String getHealthMessage() {
